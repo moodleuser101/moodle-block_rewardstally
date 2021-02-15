@@ -25,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'block_rewardstally';
-$plugin->version = 2021021402;
+$plugin->version = 2021021403;
 $plugin->requires = 2015111600;
 $plugin->maturity = MATURITY_RC;
 $plugin->release = 'v0.9-rc1';
