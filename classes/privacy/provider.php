@@ -26,10 +26,18 @@ namespace block_rewardstally\privacy;
 use core_privacy\local\metadata\collection;
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Implements the Moodle privacy API
+ */
 class provider implements
 // This plugin does store personal user data.
 \core_privacy\local\metadata\provider {
 
+    /**
+     * Called by the Moodle Privacy API interface.
+     * @param collection $collection Moodle privacy collection object.
+     * @return collection The updated Moodle privacy collection object.
+     */
     public static function get_metadata(collection $collection): collection {
 
         $collection->add_external_location_link('rewards_api', [

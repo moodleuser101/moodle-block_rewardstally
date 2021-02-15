@@ -208,7 +208,7 @@ class block_rewardstally extends block_base {
     /**
      * Takes a user-supplied hexadecimal colour code and ascertains whether or not it can be used to
      * form an HTML colour code string.
-     * @param string the hexadecimal (HTML) colour code to check, without the # prefix.
+     * @param string $colour the hexadecimal (HTML) colour code to check, without the # prefix.
      * @return boolean whether or not the supplied $colour can be used as an HTML colour code
      */
     private function block_rewardstally_validatecolour($colour) {
@@ -221,7 +221,7 @@ class block_rewardstally extends block_base {
     /**
      * Determines whether a colour code is 'light' or 'dark' to help ascertain what
      * type of background/foreground colour combination is required.
-     * @param string the hexadecimal colour code
+     * @param string $hex the hexadecimal colour code
      * @return int colour brightness value on a 0-255 scale
      */
     private function block_rewardstally_getbrightness($hex) {
