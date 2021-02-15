@@ -22,9 +22,9 @@
  * @copyright  2021 P Reid
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-defined('MOODLE_INTERNAL') || die();
 namespace block_rewardstally\privacy;
 use core_privacy\local\metadata\collection;
+defined('MOODLE_INTERNAL') || die();
 
 class provider implements
 // This plugin does store personal user data.

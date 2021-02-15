@@ -98,7 +98,7 @@ function block_rewardstally_query_user($user) {
  * community objects, where each community object contains a name, a cumulative count of the
  * community's point score and an associated hexadecimal/HTML colour code (no # prefix) for
  * the community.
- * @return array an array of community objects, each community object is an array with keys 'name', 'count', 'colour'
+ * @return array community objects, each community object is an array with keys 'name', 'count', 'colour'
  */
 function block_rewardstally_query_communities() {
     /*

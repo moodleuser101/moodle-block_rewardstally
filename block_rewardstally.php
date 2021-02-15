@@ -51,8 +51,6 @@ class block_rewardstally extends block_base {
      * @return Moodle content object array
      */
     public function get_content() {
-        global $USER;
-        $rewardsdata = $this->block_rewardstally_getremotedata();
         if ($this->content !== null) {
             return $this->content;
         }
@@ -61,6 +59,16 @@ class block_rewardstally extends block_base {
             return $this->content;
         }
         $this->content = new stdClass;
+        /*
+         * Do not populate the data for 'guest' users etc, as some of this info
+         * might reasonably be considered to be not for public consumption
+         * by the school.
+         */
+        if (isloggedin() && !(isguestuser())) {
+            $rewardsdata = $this->block_rewardstally_getremotedata();
+        } else {
+            $rewardsdata = "";
+        }
 
         if (isset($rewardsdata["timestamp"])) {
             $this->content->footer = "<span class='small text-center'>" .
@@ -103,7 +111,7 @@ class block_rewardstally extends block_base {
                         $colour = "000000";
                     }
                     /*
-                     * WE need two potential text colours - dark and light respectively,
+                     * We need two potential text colours - dark and light respectively,
                      * to act as foreground colours. We compute whether the proposed background is
                      * 'light' or 'dark' and apply the opposite foreground colour.
                      */
@@ -122,7 +130,17 @@ class block_rewardstally extends block_base {
         }
 
         $myoutput .= "\n</tbody>\n</table>\n";
-        $this->content->text = $myoutput;
+        /*
+         * Do not output block to 'guest' users etc, as some of this info
+         * might reasonably be considered to be not for public consumption
+         * by the school.
+         */
+        if (isloggedin() && !(isguestuser())) {
+            $this->content->text = $myoutput;
+        } else {
+            $this->content->text = "";
+            $this->content->footer = "";
+        }
         return $this->content;
     }
 
@@ -188,8 +206,9 @@ class block_rewardstally extends block_base {
     }
 
     /**
-     * Takes a user-supplied hexadecimal string and ascertains whether or not it can be used to form an HTML colour code stirng.
-     * @param string $colour
+     * Takes a user-supplied hexadecimal colour code and ascertains whether or not it can be used to
+     * form an HTML colour code string.
+     * @param string the hexadecimal (HTML) colour code to check, without the # prefix.
      * @return boolean whether or not the supplied $colour can be used as an HTML colour code
      */
     private function block_rewardstally_validatecolour($colour) {
@@ -202,7 +221,7 @@ class block_rewardstally extends block_base {
     /**
      * Determines whether a colour code is 'light' or 'dark' to help ascertain what
      * type of background/foreground colour combination is required.
-     * @param string $hex the hexadecimal colour code
+     * @param string the hexadecimal colour code
      * @return int colour brightness value on a 0-255 scale
      */
     private function block_rewardstally_getbrightness($hex) {

@@ -20,7 +20,7 @@
  * You can have a rather longer description of the file as well,
  * if you like, and it can span multiple lines.
  *
- * @package   block_rewardstally
+ * @package    block_rewardstally
  * @category   admin
  * @copyright  2021 P Reid
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
