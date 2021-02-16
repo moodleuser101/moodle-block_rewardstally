@@ -30,11 +30,12 @@ points totals.
 
 The Moodle block initiates a remote procedure call on the external system, and receives the data
 back via JSON. This is then processed internally and presented to the user front-end block. It 
-is fully customisable via the admin settings (site administration) pages. Examples of customisations include:
+is fully customisable via the admin settings (site administration) pages or in some instances, by the remote
+script. Examples of customisations include:
 
-* whether or not to show individual user points tally
-* the names of 'communities' and any associated colour codes
-* whether to sort communities' point scores to create a 'leader board'
+* whether or not to show individual user points tally [Moodle site-wide setting]
+* the names of 'communities' and any associated colour codes [Set in the remote script that supplies the data]
+* whether to sort communities' point scores to create a 'leader board' [Moodle site-wide setting]
 
 Maintainer
 ----------

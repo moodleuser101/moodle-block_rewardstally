@@ -42,7 +42,7 @@ class block_rewardstally extends block_base {
      * Initialise the class
      */
     public function init() {
-        $this->title = get_string('pluginname', 'block_rewardstally');
+        $this->title = get_config('block_rewardstally', 'blockheader');
     }
 
     /**
@@ -84,7 +84,7 @@ class block_rewardstally extends block_base {
                 $usertally = $rewardsdata["usertally"];
                 if (is_numeric($usertally) && ($usertally > -1)) {
                     $myoutput .= "\n<tr><td class='font-weight-bold'>" .
-                        get_config('rewardstally', 'mytallytext') . "</td><td class='text-right'>" .
+                        get_config('block_rewardstally', 'mytallytext') . "</td><td class='text-right'>" .
                         $rewardsdata["usertally"] . "</td></tr>";
                 }
             }
