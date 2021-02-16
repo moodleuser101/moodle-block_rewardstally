@@ -25,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'block_rewardstally';
-$plugin->version = 2021021605;
+$plugin->version = 2021021607;
 $plugin->requires = 2017042100; // Moodle 3.3.
 $plugin->maturity = MATURITY_RC;
 $plugin->release = 'v0.9-rc2';
