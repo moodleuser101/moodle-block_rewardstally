@@ -48,4 +48,4 @@ $string['sortcommunitydesc'] = "When set, the rewards tallies for the different 
 $string['userfield'] = "User ID field";
 $string['userfielddesc'] = "Moodle user field containing the relevant user ID to send to the external data store; if your institution uses different types of user IDs in differenet contexts, be sure to select the correct field name that will be recognised by the external data store. This is not necessarily the standard Moodle user ID. Common values: 'id' for the raw Moodle ID or 'idnumber' for the secondary user ID field. Must be a valid field in the Moodle users table.";
 $string['privacy:metadata:rewards_api'] = 'In order to integrate with the remote data source providing the rewards data, user data needs to be exchanged with that service.';
-$string['privacy:metadata:rewards_api:userid'] = 'The userid is sent from Moodle to allow a user to see the total of their rewards points to date.';
+$string['privacy:metadata:rewards_api:userid'] = 'The user ID is sent from Moodle to allow a user to see the total of their rewards points to date.';

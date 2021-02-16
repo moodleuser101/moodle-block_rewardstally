@@ -29,9 +29,7 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * Implements the Moodle privacy API
  */
-class provider implements
-// This plugin does store personal user data.
-\core_privacy\local\metadata\provider {
+class provider implements \core_privacy\local\metadata\provider {
 
     /**
      * Called by the Moodle Privacy API interface.
@@ -40,9 +38,9 @@ class provider implements
      */
     public static function get_metadata(collection $collection): collection {
 
-        $collection->add_external_location_link('rewards_api', [
+        $collection->add_external_location_link('block_rewardstally_api', [
             'userid' => 'privacy:metadata:rewards_api:userid',
-            ], 'privacy:metadata:lti_client');
+            ], 'privacy:metadata:rewards_api');
 
         return $collection;
     }
