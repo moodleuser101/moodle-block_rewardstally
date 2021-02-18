@@ -24,12 +24,13 @@
  */
 namespace block_rewardstally\privacy;
 use core_privacy\local\metadata\collection;
+use core_privacy\local\request\data_provider;
 defined('MOODLE_INTERNAL') || die();
 
 /**
  * Implements the Moodle privacy API
  */
-class provider implements \core_privacy\local\metadata\provider {
+class provider implements \core_privacy\local\metadata\provider, \core_privacy\local\request\data_provider {
 
     /**
      * Called by the Moodle Privacy API interface.

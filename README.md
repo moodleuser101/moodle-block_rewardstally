@@ -37,6 +37,26 @@ script. Examples of customisations include:
 * the names of 'communities' and any associated colour codes [Set in the remote script that supplies the data]
 * whether to sort communities' point scores to create a 'leader board' [Moodle site-wide setting]
 
+Requirements
+------------
+No knowledge of Moodle plugin development is required to use this plugin, however some knowledge of programming 
+(eg in PHP) will be required as the rewardsrpc.php (or any file you choose) needs to be set up on an external 
+server that provides access to the rewards database; an example file is included with the correct function calls 
+to return the necessary JSON data.
+
+Usage
+-----
+* Install the block in Moodle by downloading the .ZIP and using Moodle's plugin interface to install it in the standard way. 
+The default settings should be fine for most use cases.
+* Find the file 'rewardsrpc.php' which should be within the web root of Moodle at ..../blocks/rewardstally/rewardsrpc.php'. 
+This file should either be edited in-situ or moved to some other web server. Use the comments and guidance notes inside this 
+file to input the logic (which may be database calls etc) in order to extract the rewards data from your existing IT systems.
+* Use the Moodle admin console Site administration -> Plugins -> Rewards Tally to ensure the settings are correct. 
+The 'User ID Field', 'Rewards API URL' and 'Rewards API Secret' will probably need to be set. Be sure to generate your 
+own API Secret as an SHA-256 string, eg using a web-based generation site and ensure it is updated in rewardsrpc.php
+* n.b. rewardsrpc.php can be renamed as long as its new name is updated in the 'Rewards API URL' setting. It need not 
+be a PHP script either.
+
 Maintainer
 ----------
 

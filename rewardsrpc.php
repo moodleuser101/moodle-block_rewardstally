@@ -46,13 +46,12 @@ if (isset($_REQUEST["api_token"])) {
 } else {
     block_rewardstally_reject_token();
 }
-
 if (isset($_REQUEST["userid"])) {
     $queryuser = true;
     $userid = filter_input(INPUT_POST, "userid", FILTER_SANITIZE_STRING);
 }
 
-if ($queryuser) {
+if ($queryuser && block_rewardstally_check_studentid($userid)) {
     $utally = block_rewardstally_query_user($userid);
 }
 
@@ -79,18 +78,18 @@ function block_rewardstally_reject_token() {
  * Queries the external data store and returns the
  * points tally associated with the given user id, or -1 if user was not found
  * @param string $user user ID to query
- * @return int count of the user's rewards tally/point score
+ * @return int count of the user's rewards tally/point score, or -1 if not relevant.
  */
 function block_rewardstally_query_user($user) {
     /*
      * Some specific code will need to go in here to conduct the extraction of the data.
-     * It would also be wise to validate the userid in $user, and perhaps determine
-     * whether a tally is relevant to this user's context; eg if the supplied user ID
-     * is that of a "teacher", then return -1.
+     * block_rewardstally_check_studentid() should already have validated the *format*
+     * of the user ID. In the event of the user ID being not found in the database call or
+     * otherwise not relevant, return -1.
      */
 
-    // For demo purposes, we just return the userid; need to return the actual count.
-    return $user;
+    // For demo purposes, we just return a random number.
+    return rand(32, 7373);
 }
 
 /**
@@ -143,4 +142,44 @@ function block_rewardstally_set_validity() {
      *
      */
     return $default;
+}
+
+/**
+ * Performs regular expression and other such checks on the supplied ID to ascertain
+ * whether or not this ID corresponds to a student ID. For most schools, rewards
+ * points are awarded to students, not staff, so it would be pointless to query for rewards
+ * points for an ID that corresponded to a staff member.
+ * @param string $id supplied user ID that needs to be checked
+ * @return boolean whether or not this ID likely corresponds to a student.
+ */
+function block_rewardstally_check_studentid($id) {
+    /*
+     * Institutions should alter this method to meet the needs of users in their
+     * context and setting. Sample code is included here.
+     */
+    /*
+     * This sample code assumes a school is using the UK's 'Unique Pupil Number' (UPN)
+     * as the ID number for linking different IT systems together within a school. Thus, a
+     * user with a valid UPN number is a student, and a user without a valid UPN is likely a staff member.
+     */
+    $id = trim(strtoupper($id)); // Convert to upper case if it isn't already for performing checks and remove whitespace.
+    if (strlen($id) !== 13) {
+        return false; // UPNs are 13 characters long.
+    }
+    if (preg_match("/[^A-Z0-9]/", $id) > 0) {
+        // Fail straight away: any non-letter/non-digit in a UPN is bad.
+        return false;
+    }
+    $numletters = 0;
+    for ($i = 0; $i < strlen($id); $i++) {
+        // Look at each letter in the id; see if it is a letter, increment the $numletters.
+        $char = substr($id, $i, 1);
+        if (preg_match("/[A-Z]/", $char) > 0) {
+            $numletters++;
+        }
+    }
+    if ($numletters !== 1) {
+        return false; // UPNs have precisely one letter.
+    }
+    return true;
 }
